@@ -31,7 +31,7 @@ jobs:
 
       - name: Create RDP User with Secure Password
         run: |
-          $password = "010206"
+          $password = "010206Abc!"  # <-- FIX Ở ĐÂY: Thêm uppercase (A), lowercase (b,c), special (!) để pass policy. Mày có thể thay bằng cái khác phức tạp hơn nếu muốn.
           $securePass = ConvertTo-SecureString $password -AsPlainText -Force
           New-LocalUser -Name "RDP" -Password $securePass -AccountNeverExpires
           Add-LocalGroupMember -Group "Administrators" -Member "RDP"
@@ -90,7 +90,7 @@ jobs:
           Write-Host "`n=== RDP ACCESS ==="
           Write-Host "Address: $env:TAILSCALE_IP"
           Write-Host "Username: RDP"
-          Write-Host "Password: $(echo $env:RDP_CREDS)"
+          Write-Host "Password: $env:RDP_CREDS"  # Sẽ hiển thị "User: RDP | Password: 010206Abc!" ở đây
           Write-Host "==================`n"
           
           # Keep runner active indefinitely (or until manually cancelled)
